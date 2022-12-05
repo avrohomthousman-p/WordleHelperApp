@@ -4,7 +4,7 @@
     <style name="simple_view">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 
 
@@ -17,6 +17,7 @@
     <style name="simple_view.spinner">
         <item name="android:layout_marginTop">@dimen/medium_margin</item>
         <item name="android:layout_marginRight">@dimen/large_margin</item>
+        <item name="android:minHeight">@dimen/spinner_height</item>
     </style>
 
 
@@ -24,6 +25,9 @@
         <item name="android:layout_marginTop">@dimen/small_margin</item>
         <item name="android:inputType">textCapCharacters</item>
         <item name="android:paddingLeft">@dimen/medium_margin</item>
+        <item name="android:maxEms">@integer/letters_in_alphabet</item>
+        <item name="android:minEms">@integer/smallest_edit_text_length</item>
+        <item name="android:gravity">center</item>
         <item name="android:hint">@string/hint</item>
     </style>
 
