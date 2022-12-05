@@ -8,12 +8,10 @@
     </style>
 
 
-
     <style name="simple_view.letter_number">
         <item name="android:layout_marginTop">@dimen/medium_margin</item>
         <item name="android:layout_marginRight">@dimen/medium_margin</item>
     </style>
-
 
 
     <style name="simple_view.spinner">
@@ -22,9 +20,11 @@
     </style>
 
 
-
     <style name="simple_view.letters_entry">
         <item name="android:layout_marginTop">@dimen/small_margin</item>
+        <item name="android:inputType">textCapCharacters</item>
+        <item name="android:paddingLeft">@dimen/medium_margin</item>
+        <item name="android:hint">@string/hint</item>
     </style>
 
 
