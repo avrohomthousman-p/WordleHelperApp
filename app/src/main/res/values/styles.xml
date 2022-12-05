@@ -4,7 +4,7 @@
     <style name="simple_view">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Medium</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
     </style>
 
 
@@ -22,9 +22,7 @@
 
 
     <style name="simple_view.letters_entry">
-        <item name="android:layout_marginTop">@dimen/small_margin</item>
         <item name="android:inputType">textCapCharacters</item>
-        <item name="android:paddingLeft">@dimen/medium_margin</item>
         <item name="android:maxEms">@integer/letters_in_alphabet</item>
         <item name="android:minEms">@integer/smallest_edit_text_length</item>
         <item name="android:gravity">center</item>

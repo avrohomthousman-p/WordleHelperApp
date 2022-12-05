@@ -18,8 +18,10 @@ import com.example.wordle_helper.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
+    final Spinner[] spinners = new Spinner[5];
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         setupFab();
-        setupSpinner();
+        setupSpinners();
     }
 
     private void setupFab() {
@@ -49,7 +51,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setupSpinner(){
+    private void setupSpinners(){
+        this.spinners[0] = binding.contentMain.spinner1;
+        this.spinners[1] = binding.contentMain.spinner2;
+        this.spinners[2] = binding.contentMain.spinner3;
+        this.spinners[3] = binding.contentMain.spinner4;
+        this.spinners[4] = binding.contentMain.spinner5;
+
+        for(Spinner sp : this.spinners){
+            sp.setAdapter(createSpinnerAdapter());
+        }
+    }
+
+
+    private ArrayAdapter<CharSequence> createSpinnerAdapter(){
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.contains_array, android.R.layout.simple_spinner_item);
@@ -57,9 +72,9 @@ public class MainActivity extends AppCompatActivity {
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // Apply the adapter to the spinner
-        binding.contentMain.spinner1.setAdapter(adapter);
+        return adapter;
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

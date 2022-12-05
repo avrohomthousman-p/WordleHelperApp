@@ -11,6 +11,8 @@
     <string name="letter4">Fourth letter:</string>
     <string name="letter5">Fifth letter:</string>
     <string name="hint">ABCD</string>
+    <string name="must_contain">Word Must Contain:</string>
+    <string name="must_not_contain">Word Must Not Contain: </string>
 
 
     <string-array name="contains_array">
