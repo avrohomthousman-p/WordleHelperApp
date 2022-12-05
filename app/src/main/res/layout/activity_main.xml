@@ -9,7 +9,8 @@
     <include layout="@layout/activity_main_toolbar"
         android:id="@+id/toolbar"/>
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/content_main"
+        android:id="@+id/content_main"/>
 
     <include layout="@layout/activity_main_fab"
         android:id="@+id/fab"/>
