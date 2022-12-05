@@ -1,7 +1,8 @@
-package com.example.wordle_helper;
+package com.example.wordle_helper.Activities;
 
 import android.os.Bundle;
 
+import com.example.wordle_helper.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
