@@ -42,21 +42,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setupSpinners(){
-        this.spinners[0] = binding.contentMain.spinner1;
-        this.spinners[1] = binding.contentMain.spinner2;
-        this.spinners[2] = binding.contentMain.spinner3;
-        this.spinners[3] = binding.contentMain.spinner4;
-        this.spinners[4] = binding.contentMain.spinner5;
+        this.spinners[0] = binding.contentMain.letterSection1.spinner;
+        this.spinners[1] = binding.contentMain.letterSection2.spinner;
+        this.spinners[2] = binding.contentMain.letterSection3.spinner;
+        this.spinners[3] = binding.contentMain.letterSection4.spinner;
+        this.spinners[4] = binding.contentMain.letterSection5.spinner;
 
         for(Spinner sp : this.spinners){
             sp.setAdapter(createSpinnerAdapter());
         }
 
-        this.letterEntries[0] = binding.contentMain.letterEntry1;
-        this.letterEntries[1] = binding.contentMain.letterEntry2;
-        this.letterEntries[2] = binding.contentMain.letterEntry3;
-        this.letterEntries[3] = binding.contentMain.letterEntry4;
-        this.letterEntries[4] = binding.contentMain.letterEntry5;
+        this.letterEntries[0] = binding.contentMain.letterSection1.letterEntry;
+        this.letterEntries[1] = binding.contentMain.letterSection2.letterEntry;
+        this.letterEntries[2] = binding.contentMain.letterSection3.letterEntry;
+        this.letterEntries[3] = binding.contentMain.letterSection4.letterEntry;
+        this.letterEntries[4] = binding.contentMain.letterSection5.letterEntry;
     }
 
 
