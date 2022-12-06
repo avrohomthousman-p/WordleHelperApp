@@ -16,7 +16,7 @@
 
 
     <string-array name="contains_array">
-        <item>Contains: </item>
-        <item>Does Not Contain: </item>
+        <item>Can Contain: </item>
+        <item>Can Not Contain: </item>
     </string-array>
 </resources>

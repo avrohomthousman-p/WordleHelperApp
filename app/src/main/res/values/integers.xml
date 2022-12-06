@@ -2,4 +2,5 @@
 <resources>
     <integer name="letters_in_alphabet">26</integer>
     <integer name="smallest_edit_text_length">8</integer>
+    <integer name="max_snackbar_lines">4</integer>
 </resources>

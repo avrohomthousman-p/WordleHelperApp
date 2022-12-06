@@ -3,29 +3,26 @@ package com.example.wordle_helper.Activities;
 import android.os.Bundle;
 
 import com.example.wordle_helper.R;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.wordle_helper.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
     final Spinner[] spinners = new Spinner[5];
+    final EditText[] letterEntries = new EditText[5];
+    ActivityMainBinding binding;
 
     private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +34,11 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar.toolbar);
 
 
-        setupFab();
+        binding.fab.fab.setOnClickListener(new FabClickListener(this));
+
         setupSpinners();
     }
 
-    private void setupFab() {
-        binding.fab.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
 
 
     private void setupSpinners(){
@@ -62,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         for(Spinner sp : this.spinners){
             sp.setAdapter(createSpinnerAdapter());
         }
+
+        this.letterEntries[0] = binding.contentMain.letterEntry1;
+        this.letterEntries[1] = binding.contentMain.letterEntry2;
+        this.letterEntries[2] = binding.contentMain.letterEntry3;
+        this.letterEntries[3] = binding.contentMain.letterEntry4;
+        this.letterEntries[4] = binding.contentMain.letterEntry5;
     }
 
 
