@@ -3,20 +3,20 @@
     <string name="action_settings">Settings</string>
 
     <string name="go_to_word_display">See Words</string>
-    <string name="instructions">Enter Candidates For Each Character</string>
+    <string name="instructions">Give Me Words: </string>
 
-    <string name="letter1">First letter:</string>
-    <string name="letter2">Second letter:</string>
-    <string name="letter3">Third letter:</string>
-    <string name="letter4">Fourth letter:</string>
-    <string name="letter5">Fifth letter:</string>
+    <string name="letter1">Whose first letter:</string>
+    <string name="letter2">Whose second letter:</string>
+    <string name="letter3">Whose third letter:</string>
+    <string name="letter4">Whose fourth letter:</string>
+    <string name="letter5">Whose fifth letter:</string>
     <string name="hint">ABCD</string>
-    <string name="must_contain">Word Must Contain:</string>
-    <string name="must_not_contain">Word Must Not Contain: </string>
+    <string name="must_contain">That Contain These Letters:</string>
+    <string name="must_not_contain">That Don\'t Contain These Letters: </string>
 
 
     <string-array name="contains_array">
-        <item>Can Contain: </item>
-        <item>Can Not Contain: </item>
+        <item>Can Be: </item>
+        <item>Can Not Be: </item>
     </string-array>
 </resources>
