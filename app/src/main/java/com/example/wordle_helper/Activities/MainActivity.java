@@ -12,15 +12,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
-    //references to merge files
-    ContentMainLetterSection1Binding letterSection1;
-    ContentMainLetterSection2Binding letterSection2;
-    ContentMainLetterSection3Binding letterSection3;
-    ContentMainLetterSection4Binding letterSection4;
-    ContentMainLetterSection5Binding letterSection5;
-
-
-    //these arent strictly necessary, but they make things easier
     final Spinner[] spinners = new Spinner[5];
     final EditText[] letterEntries = new EditText[5];
 
@@ -35,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        bindMergeFiles();
-
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar.toolbar);
@@ -48,31 +37,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void bindMergeFiles() {
-        letterSection1 = ContentMainLetterSection1Binding.bind(binding.getRoot());
-        letterSection2 = ContentMainLetterSection2Binding.bind(binding.getRoot());
-        letterSection3 = ContentMainLetterSection3Binding.bind(binding.getRoot());
-        letterSection4 = ContentMainLetterSection4Binding.bind(binding.getRoot());
-        letterSection5 = ContentMainLetterSection5Binding.bind(binding.getRoot());
-    }
-
-
     private void setupSpinners(){
-        this.spinners[0] = letterSection1.spinner1;
-        this.spinners[1] = letterSection2.spinner2;
-        this.spinners[2] = letterSection3.spinner3;
-        this.spinners[3] = letterSection4.spinner4;
-        this.spinners[4] = letterSection5.spinner5;
+        this.spinners[0] = binding.contentMain.letterSection1.spinner;
+        this.spinners[1] = binding.contentMain.letterSection2.spinner;
+        this.spinners[2] = binding.contentMain.letterSection3.spinner;
+        this.spinners[3] = binding.contentMain.letterSection4.spinner;
+        this.spinners[4] = binding.contentMain.letterSection5.spinner;
 
         for(Spinner sp : this.spinners){
             sp.setAdapter(createSpinnerAdapter());
         }
 
-        this.letterEntries[0] = letterSection1.letterEntry1;
-        this.letterEntries[1] = letterSection2.letterEntry2;
-        this.letterEntries[2] = letterSection3.letterEntry3;
-        this.letterEntries[3] = letterSection4.letterEntry4;
-        this.letterEntries[4] = letterSection5.letterEntry5;
+        this.letterEntries[0] = binding.contentMain.letterSection1.letterEntry;
+        this.letterEntries[1] = binding.contentMain.letterSection2.letterEntry;
+        this.letterEntries[2] = binding.contentMain.letterSection3.letterEntry;
+        this.letterEntries[3] = binding.contentMain.letterSection4.letterEntry;
+        this.letterEntries[4] = binding.contentMain.letterSection5.letterEntry;
     }
 
 

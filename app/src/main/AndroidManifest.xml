@@ -16,6 +16,7 @@
             android:name=".Activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
+            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/Theme.WordleHelper.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

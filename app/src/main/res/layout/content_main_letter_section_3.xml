@@ -1,43 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/letter_section_3"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
     tools:showIn="@layout/content_main">
-
-    <include
-        android:id="@+id/separator3"
-        layout="@layout/horizontal_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letter_entry2" />
 
 
     <TextView
-        android:id="@+id/letter_number3"
         style="@style/simple_view.letter_number"
-        android:text="@string/letter3"
-        app:layout_constraintEnd_toStartOf="@+id/spinner3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator3" />
+        android:text="@string/letter3" />
 
 
     <Spinner
-        android:id="@+id/spinner3"
-        style="@style/simple_view.spinner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/letter_number3"
-        app:layout_constraintTop_toBottomOf="@+id/separator3" />
+        android:id="@+id/spinner"
+        style="@style/simple_view.spinner" />
 
 
     <EditText
-        android:id="@+id/letter_entry3"
-        style="@style/simple_view.letters_entry"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+        android:id="@+id/letter_entry"
+        style="@style/simple_view.letters_entry" />
 
 
-</merge>
+</LinearLayout>
