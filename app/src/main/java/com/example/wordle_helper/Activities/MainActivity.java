@@ -1,15 +1,17 @@
 package com.example.wordle_helper.Activities;
-import android.os.Bundle;
-import com.example.wordle_helper.R;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
-import com.example.wordle_helper.databinding.*;
 
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.ui.AppBarConfiguration;
+
+import com.example.wordle_helper.R;
+import com.example.wordle_helper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     final Spinner[] spinners = new Spinner[5];
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar.toolbar);
+        setSupportActionBar(binding.toolbarFile.toolbar);
 
 
         binding.fab.fab.setOnClickListener(new FabClickListener(this));
