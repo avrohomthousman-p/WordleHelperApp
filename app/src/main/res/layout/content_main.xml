@@ -61,59 +61,27 @@
 
 
     <!-- First Line -->
-    <include
-        android:id="@+id/letter_section_1"
-        layout="@layout/content_main_letter_section_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letters_not_contained" />
+    <include layout="@layout/content_main_letter_section_1" />
+
 
 
     <!-- Second Line -->
+    <include layout="@layout/content_main_letter_section_2" />
 
-    <include
-        android:id="@+id/letter_section_2"
-        layout="@layout/content_main_letter_section_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letter_section_1" />
+
 
     <!-- third line -->
+    <include layout="@layout/content_main_letter_section_3" />
 
-    <include
-        android:id="@+id/letter_section_3"
-        layout="@layout/content_main_letter_section_3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letter_section_2" />
+
 
     <!-- Fourth Line -->
+    <include layout="@layout/content_main_letter_section_4" />
 
-    <include
-        android:id="@+id/letter_section_4"
-        layout="@layout/content_main_letter_section_4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letter_section_3" />
+
 
     <!-- Fifth Line -->
-
-    <include
-        android:id="@+id/letter_section_5"
-        layout="@layout/content_main_letter_section_5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/letter_section_4" />
+    <include layout="@layout/content_main_letter_section_5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

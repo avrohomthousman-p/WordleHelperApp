@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="0dp"
-    android:layout_height="0dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/letter_section_3"
+    tools:showIn="@layout/content_main">
 
-
-    <!-- Horizontal Line For Separation -->
     <include
-        android:id="@+id/separator"
+        android:id="@+id/separator3"
         layout="@layout/horizontal_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/letter_entry2" />
 
 
-    <!-- Prompt -->
     <TextView
-        android:id="@+id/letter_number"
+        android:id="@+id/letter_number3"
         style="@style/simple_view.letter_number"
         android:text="@string/letter3"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintEnd_toStartOf="@+id/spinner3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator" />
+        app:layout_constraintTop_toBottomOf="@+id/separator3" />
 
 
-    <!-- Dropdown menu -->
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner3"
         style="@style/simple_view.spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/letter_number"
-        app:layout_constraintTop_toBottomOf="@+id/separator" />
+        app:layout_constraintStart_toEndOf="@+id/letter_number3"
+        app:layout_constraintTop_toBottomOf="@+id/separator3" />
 
 
-    <!-- Actual Input -->
     <EditText
-        android:id="@+id/letter_entry"
+        android:id="@+id/letter_entry3"
         style="@style/simple_view.letters_entry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner3" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>
