@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -93,4 +94,82 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArray("letter_entry_data", collectLetterEntries());
+        outState.putIntArray("spinner_settings", collectSpinnerSettings());
+    }
+
+
+    /**
+     * Collects the letters the user entered into each of the letter entry sections that
+     * is associated with a spinner, and saves it to a string array. This array can be used
+     * when we are saving the state of the app for methods like onStop or for changing the
+     * orientation.
+     *
+     * @return an array of the letters the user entered.
+     */
+    private String[] collectLetterEntries(){
+        String[] data = new String[letterEntries.length];
+        for(int i = 0; i < letterEntries.length; i++){
+            data[i] = letterEntries[i].getText().toString();
+        }
+
+        return data;
+    }
+
+
+    /**
+     * Collects the selected option of all the spinners and saves it to an array. This data can
+     * be used to save the state of the of the app for methods like onStop or for changing the
+     * orientation.
+     *
+     * @return an array of ID's representing what item each spinner has selected
+     */
+    private int[] collectSpinnerSettings(){
+        int[] data = new int[spinners.length];
+        for(int i = 0; i < spinners.length; i++){
+            data[i] = spinners[i].getSelectedItemPosition();
+        }
+
+        return data;
+    }
+
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        setLetterEntries(savedInstanceState.getStringArray("letter_entry_data"));
+        setSpinnerSelections(savedInstanceState.getIntArray("spinner_settings"));
+    }
+
+
+    /**
+     * Sets the text of each EditText associated with a spinner to the text specified
+     * in the array. This should be used when loading the state of the app as would be
+     * necessary with calls to onStart or when the orientation changes.
+     *
+     * @param data the text to be placed in all the EditText fields
+     */
+    private void setLetterEntries(String[] data){
+        for(int i = 0; i < letterEntries.length; i++){
+            letterEntries[i].setText(data[i]);
+        }
+    }
+
+
+    /**
+     * Sets the selected item of each spinner to the item with the ID specified in the array.
+     * This should be used when loading the state of the app as would be necessary with calls
+     * to onStart or when the orientation changes.
+     *
+     * @param selections the selections the spinners need to be set to.
+     */
+    private void setSpinnerSelections(int[] selections){
+        for(int i = 0; i < spinners.length; i++){
+            spinners[i].setSelection(selections[i]);
+        }
+    }
 }
