@@ -75,8 +75,12 @@ public class FabClickListener implements View.OnClickListener{
      * contained letters, or null if there are no common letters.
      */
     private Character compareContainAndNotContainForOverlap(){
-        String contained = context.binding.contentMain.lettersContained.getText().toString();
-        String notContained = context.binding.contentMain.lettersNotContained.getText().toString();
+        String contained = context.binding.contentMain.lettersContainedSection.lettersContained
+                .getText().toString();
+
+
+        String notContained = context.binding.contentMain.lettersNotContainedSection.lettersNotContained
+                .getText().toString();
 
 
         return getOverlappingCharacter(contained, notContained);
@@ -96,7 +100,9 @@ public class FabClickListener implements View.OnClickListener{
      */
     private Character compareContainsInSpinnerToNotContainsForOverlap(){
         final String spinnerTextForContains = context.getResources().getStringArray(R.array.contains_array)[0];
-        final String lettersMayNotContain = context.binding.contentMain.lettersNotContained.getText().toString();
+        final String lettersMayNotContain = context.binding.contentMain.lettersNotContainedSection
+                .lettersNotContained.getText().toString();
+
 
         for(int i = 0; i < context.spinners.length; i++){
             Spinner current = context.spinners[i];

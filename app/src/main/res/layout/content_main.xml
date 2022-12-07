@@ -21,43 +21,21 @@
 
 
     <!-- See what letters are and are not used -->
-    <TextView
-        android:id="@+id/text_view_for_contains"
-        style="@style/simple_view.letter_number"
+    <include layout="@layout/content_main_letters_contained"
+        android:id="@+id/letters_contained_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/must_contain"
-        app:layout_constraintEnd_toStartOf="@+id/letters_contained"
+        app:layout_constraintTop_toBottomOf="@+id/instructions_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/instructions_header" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <EditText
-        android:id="@+id/letters_contained"
-        style="@style/simple_view.letters_entry"
+    <include layout="@layout/content_main_letters_not_contained"
+        android:id="@+id/letters_not_contained_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_view_for_contains"
-        app:layout_constraintTop_toBottomOf="@+id/instructions_header" />
-
-    <TextView
-        android:id="@+id/text_view_for_not_contains"
-        style="@style/simple_view.letter_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/must_not_contain"
-        app:layout_constraintEnd_toStartOf="@+id/letters_not_contained"
+        app:layout_constraintTop_toBottomOf="@+id/letters_contained_section"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_for_contains" />
-
-    <EditText
-        android:id="@+id/letters_not_contained"
-        style="@style/simple_view.letters_entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/text_view_for_not_contains"
-        app:layout_constraintTop_toBottomOf="@+id/letters_contained" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <!-- First Line -->
