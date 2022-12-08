@@ -1,7 +1,11 @@
 package com.example.wordle_helper.Activities;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
+
+import androidx.annotation.NonNull;
+
 import com.example.wordle_helper.R;
 import com.example.wordle_helper.databinding.ActivityMainBinding;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,7 +31,10 @@ public class FabClickListener implements View.OnClickListener{
         }
 
 
-        //TODO: switch activities
+        //update model and switch activities
+        sendRequestsToModel();
+        Intent intent = new Intent(context, WordDisplayActivity.class);
+        context.startActivity(intent);
     }
 
 
@@ -99,7 +106,6 @@ public class FabClickListener implements View.OnClickListener{
      * any spinner set to "Can Contain", or null if no such letter exists.
      */
     private Character compareContainsInSpinnerToNotContainsForOverlap(){
-        final String spinnerTextForContains = context.getResources().getStringArray(R.array.contains_array)[0];
         final String lettersMayNotContain = context.binding.contentMain.lettersNotContainedSection
                 .lettersNotContained.getText().toString();
 
@@ -107,7 +113,7 @@ public class FabClickListener implements View.OnClickListener{
         for(int i = 0; i < context.spinners.length; i++){
             Spinner current = context.spinners[i];
 
-            if(current.getSelectedItem().equals(spinnerTextForContains)){
+            if(current.getSelectedItem().equals(context.getResources().getStringArray(R.array.contains_array)[0])){
                 String lettersEntered = context.letterEntries[i].getText().toString();
 
                 //check if it has a character that is also in our "Must Not Contain" field
@@ -153,5 +159,60 @@ public class FabClickListener implements View.OnClickListener{
         Snackbar.make(v, message, Snackbar.LENGTH_LONG)
                 .setTextMaxLines(context.getResources().getInteger(R.integer.max_snackbar_lines))
                 .show();
+    }
+
+
+    /**
+     * Makes all the required function calls to the model based on the letters the user
+     * entered.
+     */
+    private void sendRequestsToModel(){
+        //check letters the word must contain
+        context.mModel.retainIfContains(context.binding.contentMain
+                .lettersContainedSection.lettersContained.getText().toString());
+
+
+        //check letters the word must not contain
+        context.mModel.removeIfContains(context.binding.contentMain
+                .lettersNotContainedSection.lettersNotContained.getText().toString());
+
+
+
+        //check the letters that can/can't be used in specific indexes
+        context.mModel.retainIfMatches(generateRegexFromSpinnerData());
+    }
+
+
+    /**
+     * Collects all the data the user entered for which characters are and are not allowed for
+     * which indexes of the solution word, and generates a regex to check for that pattern.
+     *
+     * @return a regex that checks that a word uses only the desired characters in the right place.
+     */
+    private String generateRegexFromSpinnerData() {
+        int[] spinnerSelections = context.collectSpinnerSettings();
+        String[] letterEntries = context.collectLetterEntries();
+
+        StringBuilder regex = new StringBuilder();
+        for(int i = 0; i < spinnerSelections.length; i++){
+            regex.append('[');
+
+            String userEntry = letterEntries[i];
+
+            if(userEntry.length() == 0){
+                regex.append("a-z");
+            }
+            else{
+                if(spinnerSelections[i] == 1){
+                    regex.append('^');
+                }
+
+                regex.append(userEntry);
+            }
+
+            regex.append(']');
+        }
+
+        return regex.toString();
     }
 }
