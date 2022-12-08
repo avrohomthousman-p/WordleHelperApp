@@ -13,10 +13,17 @@
         android:theme="@style/Theme.WordleHelper"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.WordDisplayActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activities.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:exported="true"
             android:label="@string/app_name"
-            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/Theme.WordleHelper.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
