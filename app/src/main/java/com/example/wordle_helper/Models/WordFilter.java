@@ -1,19 +1,51 @@
 package com.example.wordle_helper.Models;
+import com.example.wordle_helper.Utils.SerializationUtils;
+
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 
 /**
- * Implementation of the WordleHelper interface
+ * Implementation of the WordleHelper interface.
+ *
+ * This implementation requires an array of words to use as a list of all
+ * possible solutions for a game of Wordle.
  */
 public class WordFilter implements WordleHelper{
-    private List<String> list = WordListGenerator.getDictionary();
+    public static final String DICTIONARY_FILE = "allWords.bin";
+    private List<String> list;
+
+
+    public WordFilter(String[] fullWordList){
+        initailizeNewDictionary(fullWordList);
+    }
+
+
+    /**
+     * Generates a new List of words based on the contents of the specified word array.
+     * The list is serialized to a file for future re-use.
+     *
+     * @param fullWordList all the words to be placed in the new list of words
+     */
+    private void initailizeNewDictionary(String[] fullWordList){
+        List<String> list = new LinkedList<>();
+        for(String current : fullWordList){
+            list.add(current);
+        }
+
+        SerializationUtils.serializeObject(list, DICTIONARY_FILE);
+
+        this.list = list;
+    }
 
 
     @Override
     public void resetWordList(){
-        list = WordListGenerator.getDictionary();
+        //load the full un-modified list from the file
+        list = (List<String>) SerializationUtils.deserializeObject(DICTIONARY_FILE);
     }
+
 
     @Override
     public void retainIfStartsWith(String start) {
@@ -27,10 +59,12 @@ public class WordFilter implements WordleHelper{
         removeIf(current -> !current.startsWith(start));
     }
 
+
     @Override
     public void retainIfStartsWith(char start) {
         removeIf(current -> current.charAt(0) != start);
     }
+
 
     @Override
     public void retainIfEndsWith(String end) {

@@ -10,7 +10,7 @@
     <string name="letter3">Whose third letter:</string>
     <string name="letter4">Whose fourth letter:</string>
     <string name="letter5">Whose fifth letter:</string>
-    <string name="hint">ABCD</string>
+    <string name="hint">abcd</string>
     <string name="must_contain">That Contain These Letters:</string>
     <string name="must_not_contain">That Don\'t Contain These Letters: </string>
 

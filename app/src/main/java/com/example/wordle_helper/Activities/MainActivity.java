@@ -11,12 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.example.wordle_helper.Models.WordFilter;
+import com.example.wordle_helper.Models.WordleHelper;
 import com.example.wordle_helper.R;
 import com.example.wordle_helper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     final Spinner[] spinners = new Spinner[5];
     final EditText[] letterEntries = new EditText[5];
+
+    WordleHelper mModel;
 
     ActivityMainBinding binding;
 
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.fab.setOnClickListener(new FabClickListener(this));
 
         setupSpinners();
+
+        mModel = new WordFilter(  this.getResources().getStringArray(R.array.full_word_list)  );
     }
 
 
@@ -103,41 +109,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * Collects the letters the user entered into each of the letter entry sections that
-     * is associated with a spinner, and saves it to a string array. This array can be used
-     * when we are saving the state of the app for methods like onStop or for changing the
-     * orientation.
-     *
-     * @return an array of the letters the user entered.
-     */
-    private String[] collectLetterEntries(){
-        String[] data = new String[letterEntries.length];
-        for(int i = 0; i < letterEntries.length; i++){
-            data[i] = letterEntries[i].getText().toString();
-        }
-
-        return data;
-    }
-
-
-    /**
-     * Collects the selected option of all the spinners and saves it to an array. This data can
-     * be used to save the state of the of the app for methods like onStop or for changing the
-     * orientation.
-     *
-     * @return an array of ID's representing what item each spinner has selected
-     */
-    private int[] collectSpinnerSettings(){
-        int[] data = new int[spinners.length];
-        for(int i = 0; i < spinners.length; i++){
-            data[i] = spinners[i].getSelectedItemPosition();
-        }
-
-        return data;
-    }
-
-
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -161,6 +132,25 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
+     * Collects the letters the user entered into each of the letter entry sections that
+     * is associated with a spinner, and saves it to a string array. This array can be used
+     * when we are saving the state of the app for methods like onStop or for changing the
+     * orientation.
+     *
+     * @return an array of the letters the user entered.
+     */
+    String[] collectLetterEntries(){
+        String[] data = new String[letterEntries.length];
+        for(int i = 0; i < letterEntries.length; i++){
+            data[i] = letterEntries[i].getText().toString();
+        }
+
+        return data;
+    }
+
+
+
+    /**
      * Sets the selected item of each spinner to the item with the ID specified in the array.
      * This should be used when loading the state of the app as would be necessary with calls
      * to onStart or when the orientation changes.
@@ -171,5 +161,21 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i < spinners.length; i++){
             spinners[i].setSelection(selections[i]);
         }
+    }
+
+    /**
+     * Collects the selected option of all the spinners and saves it to an array. This data can
+     * be used to save the state of the of the app for methods like onStop or for changing the
+     * orientation.
+     *
+     * @return an array of ID's representing what item each spinner has selected
+     */
+    int[] collectSpinnerSettings(){
+        int[] data = new int[spinners.length];
+        for(int i = 0; i < spinners.length; i++){
+            data[i] = spinners[i].getSelectedItemPosition();
+        }
+
+        return data;
     }
 }
