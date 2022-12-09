@@ -1,8 +1,10 @@
 package com.example.wordle_helper.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.wordle_helper.Models.WordFilter;
+import com.example.wordle_helper.Models.WordFilterNoFilePermission;
 import com.example.wordle_helper.Models.WordleHelper;
 import com.example.wordle_helper.R;
 import com.example.wordle_helper.databinding.ActivityMainBinding;
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         setupSpinners();
 
         if (mModel == null) {
-            mModel = new WordFilter(  this.getResources().getStringArray(R.array.full_word_list)  );
+            mModel = new WordFilterNoFilePermission(
+                    this.getResources().getStringArray(R.array.full_word_list)  );
         }
     }
 
@@ -96,11 +100,15 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            //TODO
+        if(id == R.id.action_hide_keyboard){
+            hideKeyboardIfPresent();
             return true;
         }
-        else if(id == R.id.action_new_game){
+        else if (id == R.id.action_new_game) {
+            startNewGame();
+            return true;
+        }
+        else if(id == R.id.action_settings){
             //TODO
             return true;
         }
@@ -110,6 +118,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * Hides the keyboard if it is on the screen, and does nothing otherwise.
+     *
+     * I found this code on {@link <a href="https://stackoverflow.com/questions/13593069/
+     * androidhide-keyboard-after-button-click#:~:text=You%20could%20instead,
+     * placed%20on%20it.">StackOverFlow</a>}
+     */
+    private void hideKeyboardIfPresent() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(binding.contentMain.contentMain.getWindowToken(), 0);
+    }
+
+
+    /**
+     * Starts a new game by clearing all the text entry fields and resetting the model.
+     */
+    private void startNewGame(){
+        binding.contentMain.lettersContainedSection.lettersContained.setText("");
+        binding.contentMain.lettersNotContainedSection.lettersNotContained.setText("");
+
+        for(EditText et : this.letterEntries){
+            et.setText("");
+        }
+
+        mModel.resetWordList();
     }
 
 

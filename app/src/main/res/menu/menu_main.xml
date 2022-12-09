@@ -4,6 +4,11 @@
     tools:context="com.example.wordle_helper.Activities.MainActivity">
 
     <item
+        android:id="@+id/action_hide_keyboard"
+        android:title="@string/action_hide_keyboard"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_new_game"
         android:title="@string/action_new_game"
         app:showAsAction="always|withText"
