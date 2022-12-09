@@ -19,6 +19,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Theme.WordleHelper.NoActionBar.SplashScreenTheme">
+        <item name="android:background">@drawable/splash_screen_background</item>
+    </style>
+
     <style name="Theme.WordleHelper.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.WordleHelper.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
