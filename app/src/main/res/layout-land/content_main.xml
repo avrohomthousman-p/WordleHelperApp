@@ -43,7 +43,7 @@
     <!-- Horizontal Line Separator -->
     <include
         android:id="@+id/separator1"
-        layout="@layout/horizontal_line"
+        layout="@layout/separating_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
     <!-- Horizontal Line Separator -->
     <include
         android:id="@+id/separator2"
-        layout="@layout/horizontal_line"
+        layout="@layout/separating_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +109,7 @@
     <!-- Horizontal Line Separator -->
     <include
         android:id="@+id/separator3"
-        layout="@layout/horizontal_line"
+        layout="@layout/separating_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent"

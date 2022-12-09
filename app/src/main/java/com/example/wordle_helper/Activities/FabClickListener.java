@@ -168,18 +168,24 @@ public class FabClickListener implements View.OnClickListener{
      */
     private void sendRequestsToModel(){
         //check letters the word must contain
-        context.mModel.retainIfContains(context.binding.contentMain
+        MainActivity.mModel.retainIfContains(context.binding.contentMain
                 .lettersContainedSection.lettersContained.getText().toString());
 
 
         //check letters the word must not contain
-        context.mModel.removeIfContains(context.binding.contentMain
+        MainActivity.mModel.removeIfContains(context.binding.contentMain
                 .lettersNotContainedSection.lettersNotContained.getText().toString());
 
 
 
-        //check the letters that can/can't be used in specific indexes
-        context.mModel.retainIfMatches(generateRegexFromSpinnerData());
+
+        String regex = generateRegexFromSpinnerData();
+
+        //Only iterate over the word list if the user actually entered letters for specific indexes
+        if(!regex.equals("[a-z][a-z][a-z][a-z][a-z]")){
+            //check the letters that can/can't be used in specific indexes
+            MainActivity.mModel.retainIfMatches(regex);
+        }
     }
 
 

@@ -17,10 +17,11 @@ import com.example.wordle_helper.R;
 import com.example.wordle_helper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    //To make this accessible in the word_display activity, this needs to be static
+    static WordleHelper mModel = null;
+
     final Spinner[] spinners = new Spinner[5];
     final EditText[] letterEntries = new EditText[5];
-
-    WordleHelper mModel;
 
     ActivityMainBinding binding;
 
@@ -42,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         setupSpinners();
 
-        mModel = new WordFilter(  this.getResources().getStringArray(R.array.full_word_list)  );
+        if (mModel == null) {
+            mModel = new WordFilter(  this.getResources().getStringArray(R.array.full_word_list)  );
+        }
     }
 
 
