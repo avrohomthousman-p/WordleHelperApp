@@ -13,10 +13,12 @@
     <string name="hint">abcd</string>
     <string name="must_contain">That Contain These Letters:</string>
     <string name="must_not_contain">That Don\'t Contain These Letters: </string>
+    <string name="action_about">About</string>
+    <string name="action_new_game">New Game</string>
 
 
     <string-array name="contains_array">
-        <item>Can Be: </item>
-        <item>Can Not Be: </item>
+        <item>Can Only Be: </item>
+        <item>Cannot Be: </item>
     </string-array>
 </resources>

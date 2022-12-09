@@ -97,6 +97,15 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //TODO
+            return true;
+        }
+        else if(id == R.id.action_new_game){
+            //TODO
+            return true;
+        }
+        else if(id == R.id.action_about){
+            //TODO
             return true;
         }
 
