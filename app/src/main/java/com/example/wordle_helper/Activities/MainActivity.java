@@ -17,9 +17,14 @@ import com.example.wordle_helper.Models.WordFilter;
 import com.example.wordle_helper.Models.WordFilterNoFilePermission;
 import com.example.wordle_helper.Models.WordleHelper;
 import com.example.wordle_helper.R;
+import com.example.wordle_helper.Utils.DialogUtils;
 import com.example.wordle_helper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String APP_DESCRIPTION = "This app gives you words to help you solve a game " +
+            "of Wordle. You can enter the letters on the home screen as prompted, and then click the" +
+            " get words button. You will then be shown a list of words that match your requirements.";
+
     //To make this accessible in the word_display activity, this needs to be static
     static WordleHelper mModel = null;
 
@@ -113,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if(id == R.id.action_about){
-            //TODO
+            displayAbout();
             return true;
         }
 
@@ -151,6 +156,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mModel.resetWordList();
+    }
+
+
+    /**
+     * Uses the DialogUtils class to display a message about the app.
+     */
+    private void displayAbout(){
+        DialogUtils.showInfoDialog(this, "About", APP_DESCRIPTION);
     }
 
 
