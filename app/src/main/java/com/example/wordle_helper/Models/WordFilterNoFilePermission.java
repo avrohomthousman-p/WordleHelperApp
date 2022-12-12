@@ -38,8 +38,12 @@ public class WordFilterNoFilePermission implements WordleHelper {
 
     @Override
     public void resetWordList(){
-        //load the full un-modified list from the file
-        initailizeNewDictionary();
+        //we only want to reset the List if words have been removed from it
+        if(list.size() < fullWordList.length){
+
+            //load the full un-modified list from the file
+            initailizeNewDictionary();
+        }
     }
 
 

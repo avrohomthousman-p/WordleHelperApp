@@ -15,6 +15,7 @@ import java.util.List;
 public class WordFilter implements WordleHelper{
     public static final String DICTIONARY_FILE = "allWords.bin";
     private List<String> list;
+    private boolean listWasModified = false;
 
 
     public WordFilter(String[] fullWordList){
@@ -42,8 +43,13 @@ public class WordFilter implements WordleHelper{
 
     @Override
     public void resetWordList(){
-        //load the full un-modified list from the file
-        list = (List<String>) SerializationUtils.deserializeObject(DICTIONARY_FILE);
+        //only build a new list if the old list was changed
+        if(listWasModified){
+
+            //load the full un-modified list from the file
+            list = (List<String>) SerializationUtils.deserializeObject(DICTIONARY_FILE);
+            listWasModified = false;
+        }
     }
 
 
@@ -57,12 +63,14 @@ public class WordFilter implements WordleHelper{
 
 
         removeIf(current -> !current.startsWith(start));
+        listWasModified = true;
     }
 
 
     @Override
     public void retainIfStartsWith(char start) {
         removeIf(current -> current.charAt(0) != start);
+        listWasModified = true;
     }
 
 
@@ -77,11 +85,13 @@ public class WordFilter implements WordleHelper{
 
 
         removeIf(current -> !current.endsWith(end));
+        listWasModified = true;
     }
 
     @Override
     public void retainIfEndsWith(char end) {
         removeIf(current -> current.charAt(current.length() - 1) != end);
+        listWasModified = true;
     }
 
     @Override
@@ -102,6 +112,8 @@ public class WordFilter implements WordleHelper{
             }
             return false;
         });
+
+        listWasModified = true;
     }
 
     @Override
@@ -114,6 +126,7 @@ public class WordFilter implements WordleHelper{
 
 
         retainIfContains(chars.toCharArray());
+        listWasModified = true;
     }
 
     @Override
@@ -134,6 +147,8 @@ public class WordFilter implements WordleHelper{
             }
             return false;
         });
+
+        listWasModified = true;
     }
 
     @Override
@@ -146,6 +161,7 @@ public class WordFilter implements WordleHelper{
 
 
         removeIfContains(chars.toCharArray());
+        listWasModified = true;
     }
 
     @Override
@@ -159,6 +175,7 @@ public class WordFilter implements WordleHelper{
 
 
         removeIf(s -> !s.matches(regex));
+        listWasModified = true;
     }
 
     @Override
