@@ -129,8 +129,13 @@ public class MainActivity extends AppCompatActivity {
      * placed%20on%20it.">StackOverFlow</a>}
      */
     private void hideKeyboardIfPresent() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(binding.contentMain.contentMain.getWindowToken(), 0);
+        try{
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(binding.contentMain.contentMain.getWindowToken(), 0);
+        }
+        catch(Exception e){
+            Log.println(Log.WARN, "Keyboard", "hide keyboard was clicked but keyboard could  not be hidden");
+        }
     }
 
 
