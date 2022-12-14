@@ -14,13 +14,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
 
-import com.example.wordle_helper.Models.WordFilter;
 import com.example.wordle_helper.Models.WordFilterNoFilePermission;
 import com.example.wordle_helper.Models.WordleHelper;
 import com.example.wordle_helper.R;
-import com.example.wordle_helper.Utils.DialogUtils;
+import com.example.wordle_helper.Utils.DisplayUtils;
 import com.example.wordle_helper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -177,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
      * Uses the DialogUtils class to display a message about the app.
      */
     private void displayAbout(){
-        DialogUtils.showInfoDialog(this, "About", APP_DESCRIPTION);
+        DisplayUtils.showInfoDialog(this, "About", APP_DESCRIPTION);
     }
 
 

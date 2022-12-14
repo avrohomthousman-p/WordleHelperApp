@@ -16,7 +16,7 @@ import androidx.preference.PreferenceManager;
 import com.example.wordle_helper.R;
 
 
-public class DialogUtils
+public class DisplayUtils
 {
 
     /*
