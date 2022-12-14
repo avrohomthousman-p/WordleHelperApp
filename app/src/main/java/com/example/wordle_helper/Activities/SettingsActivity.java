@@ -37,9 +37,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        else{
-            Log.println(Log.ERROR, "action bar", "its null for some reason");
-        }
     }
 
 
