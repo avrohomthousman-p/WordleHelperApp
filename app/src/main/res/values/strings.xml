@@ -40,4 +40,6 @@
     <string name="auto_save_on">The game automatically saves on exit</string>
     <string name="auto_save_off">A new game is started on start up</string>
 
+    <string name="dark_mode_key">mode</string>
+
 </resources>

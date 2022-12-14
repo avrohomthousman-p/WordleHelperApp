@@ -7,9 +7,11 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.wordle_helper.R;
+import com.example.wordle_helper.Utils.DisplayUtils;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -56,6 +58,18 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+            setDarkModePreferenceListener();
+        }
+
+
+        private void setDarkModePreferenceListener() {
+            Preference darkModePreference = findPreference(getString(R.string.dark_mode_key));
+            if (darkModePreference != null) {
+                darkModePreference.setOnPreferenceChangeListener((preference, newValue) -> {
+                    DisplayUtils.setNightModeOnOrOff((Boolean) newValue);
+                    return true;
+                });
+            }
         }
     }
 }

@@ -4,7 +4,7 @@
 
         <SwitchPreferenceCompat
             app:title="@string/dark_mode"
-            app:key="mode"
+            app:key="@string/dark_mode_key"
             app:defaultValue="false"
             app:summaryOn="@string/dark_mode_on"
             app:summaryOff="@string/dark_mode_off"/>
