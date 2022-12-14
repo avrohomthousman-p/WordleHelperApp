@@ -13,6 +13,14 @@
         android:theme="@style/Theme.WordleHelper"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activities.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.WordleHelper.NoActionBar.SplashScreenTheme">
@@ -41,7 +49,6 @@
             android:theme="@style/Theme.WordleHelper.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
             </intent-filter>
 
             <meta-data

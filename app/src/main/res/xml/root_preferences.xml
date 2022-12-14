@@ -1,0 +1,26 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/display_settings">
+
+        <SwitchPreferenceCompat
+            app:title="@string/dark_mode"
+            app:key="mode"
+            app:defaultValue="false"
+            app:summaryOn="@string/dark_mode_on"
+            app:summaryOff="@string/dark_mode_off"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/game_settings">
+
+        <SwitchPreferenceCompat
+            app:key="attachment"
+            app:defaultValue="true"
+            app:summaryOff="@string/auto_save_off"
+            app:summaryOn="@string/auto_save_on"
+            app:title="@string/auto_save" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

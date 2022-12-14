@@ -22,4 +22,22 @@
         <item>Can Only Be: </item>
         <item>Cannot Be: </item>
     </string-array>
+
+
+
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="display_settings">Display</string>
+    <string name="game_settings">Game</string>
+    <string name="auto_save">Auto-Save</string>
+
+
+    <!-- Messages Preferences -->
+    <string name="dark_mode">Dark mode</string>
+    <string name="dark_mode_on">Use Dark mode if not disabled by the OS</string>
+    <string name="dark_mode_off">Use Light mode</string>
+    <string name="auto_save_on">The game automatically saves on exit</string>
+    <string name="auto_save_off">A new game is started on start up</string>
+
 </resources>

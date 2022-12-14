@@ -1,5 +1,6 @@
 package com.example.wordle_helper.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -33,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    private AppBarConfiguration appBarConfiguration;
+    ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> restoreOrSetFromPreferences_AllAppAndGameSettings());
 
 
     @Override
@@ -114,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if(id == R.id.action_settings){
-            //TODO
+            displaySettings();
             return true;
         }
         else if(id == R.id.action_about){
@@ -156,6 +161,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mModel.resetWordList();
+    }
+
+
+    /**
+     * Opens the Settings Activity.
+     */
+    private void displaySettings(){
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        settingsLauncher.launch(intent);
     }
 
 
@@ -243,5 +257,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return data;
+    }
+
+
+    //TODO: rename function and give it javadoc
+    private void restoreOrSetFromPreferences_AllAppAndGameSettings(){
+        //TODO
     }
 }
