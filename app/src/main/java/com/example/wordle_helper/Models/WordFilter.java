@@ -1,4 +1,6 @@
 package com.example.wordle_helper.Models;
+import android.util.Log;
+
 import com.example.wordle_helper.Utils.SerializationUtils;
 
 import java.util.Iterator;
@@ -13,12 +15,16 @@ import java.util.List;
  * possible solutions for a game of Wordle.
  */
 public class WordFilter implements WordleHelper{
-    public static final String DICTIONARY_FILE = "allWords.bin";
+    public final String dictionary_file;
     private List<String> list;
     private boolean listWasModified = false;
 
 
-    public WordFilter(String[] fullWordList){
+    public WordFilter(String[] fullWordList, String filesDirectory){
+        dictionary_file = filesDirectory + "allWords.bin";
+
+        Log.println(Log.INFO, "word list filepath", filesDirectory);
+
         initailizeNewDictionary(fullWordList);
     }
 
@@ -35,7 +41,7 @@ public class WordFilter implements WordleHelper{
             list.add(current);
         }
 
-        SerializationUtils.serializeObject(list, DICTIONARY_FILE);
+        SerializationUtils.serializeObject(list, dictionary_file);
 
         this.list = list;
     }
@@ -47,7 +53,7 @@ public class WordFilter implements WordleHelper{
         if(listWasModified){
 
             //load the full un-modified list from the file
-            list = (List<String>) SerializationUtils.deserializeObject(DICTIONARY_FILE);
+            list = (List<String>) SerializationUtils.deserializeObject(dictionary_file);
             listWasModified = false;
         }
     }

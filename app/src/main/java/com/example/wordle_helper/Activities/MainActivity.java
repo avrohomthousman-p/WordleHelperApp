@@ -15,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.wordle_helper.Models.WordFilter;
 import com.example.wordle_helper.Models.WordFilterNoFilePermission;
 import com.example.wordle_helper.Models.WordleHelper;
 import com.example.wordle_helper.R;
@@ -55,8 +56,9 @@ public class MainActivity extends AppCompatActivity {
         setupSpinners();
 
         if (mModel == null) {
-            mModel = new WordFilterNoFilePermission(
-                    this.getResources().getStringArray(R.array.full_word_list)  );
+            mModel = new WordFilter(
+                    this.getResources().getStringArray(R.array.full_word_list),
+                    this.getApplicationContext().getFilesDir().getAbsolutePath());
         }
     }
 
