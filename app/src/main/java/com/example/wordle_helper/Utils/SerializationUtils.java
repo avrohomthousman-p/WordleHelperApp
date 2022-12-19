@@ -1,5 +1,7 @@
 package com.example.wordle_helper.Utils;
 
+import android.util.Log;
+
 import java.io.*;
 
 /**
@@ -40,7 +42,9 @@ public class SerializationUtils {
 
         } catch (IOException i) {
             i.printStackTrace();
+            return;
         }
 
+        Log.println(Log.INFO, "seralization", "an object has been sucsessfully serialized to a file");
     }
 }
