@@ -4,13 +4,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
-
 import com.example.wordle_helper.R;
-import com.example.wordle_helper.databinding.ActivityMainBinding;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.logging.Logger;
 
 
 /**
@@ -110,11 +105,11 @@ public class FabClickListener implements View.OnClickListener{
                 .lettersNotContained.getText().toString();
 
 
-        for(int i = 0; i < context.spinners.length; i++){
-            Spinner current = context.spinners[i];
+        for(int i = 0; i < context.mSpinners.length; i++){
+            Spinner current = context.mSpinners[i];
 
             if(current.getSelectedItem().equals(context.getResources().getStringArray(R.array.contains_array)[0])){
-                String lettersEntered = context.letterEntries[i].getText().toString();
+                String lettersEntered = context.mLetterEntries[i].getText().toString();
 
                 //check if it has a character that is also in our "Must Not Contain" field
                 Character overlap = getOverlappingCharacter(lettersEntered, lettersMayNotContain);

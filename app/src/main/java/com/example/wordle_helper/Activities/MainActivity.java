@@ -16,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.wordle_helper.Models.WordFilter;
-import com.example.wordle_helper.Models.WordFilterNoFilePermission;
 import com.example.wordle_helper.Models.WordleHelper;
 import com.example.wordle_helper.R;
 import com.example.wordle_helper.Utils.DisplayUtils;
@@ -30,14 +29,15 @@ public class MainActivity extends AppCompatActivity {
     //To make this accessible in the word_display activity, this needs to be static
     static WordleHelper mModel = null;
 
-    final Spinner[] spinners = new Spinner[5];
-    final EditText[] letterEntries = new EditText[5];
+    final Spinner[] mSpinners = new Spinner[5];
+    final EditText[] mLetterEntries = new EditText[5];
 
     ActivityMainBinding binding;
 
     ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
-            result -> restoreOrSetFromPreferences_AllAppAndGameSettings());
+            result -> restoreSettingsFromPreferences());
+
 
 
     @Override
@@ -64,21 +64,21 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setupSpinners(){
-        this.spinners[0] = binding.contentMain.letterSection1.spinner;
-        this.spinners[1] = binding.contentMain.letterSection2.spinner;
-        this.spinners[2] = binding.contentMain.letterSection3.spinner;
-        this.spinners[3] = binding.contentMain.letterSection4.spinner;
-        this.spinners[4] = binding.contentMain.letterSection5.spinner;
+        this.mSpinners[0] = binding.contentMain.letterSection1.spinner;
+        this.mSpinners[1] = binding.contentMain.letterSection2.spinner;
+        this.mSpinners[2] = binding.contentMain.letterSection3.spinner;
+        this.mSpinners[3] = binding.contentMain.letterSection4.spinner;
+        this.mSpinners[4] = binding.contentMain.letterSection5.spinner;
 
-        for(Spinner sp : this.spinners){
+        for(Spinner sp : this.mSpinners){
             sp.setAdapter(createSpinnerAdapter());
         }
 
-        this.letterEntries[0] = binding.contentMain.letterSection1.letterEntry;
-        this.letterEntries[1] = binding.contentMain.letterSection2.letterEntry;
-        this.letterEntries[2] = binding.contentMain.letterSection3.letterEntry;
-        this.letterEntries[3] = binding.contentMain.letterSection4.letterEntry;
-        this.letterEntries[4] = binding.contentMain.letterSection5.letterEntry;
+        this.mLetterEntries[0] = binding.contentMain.letterSection1.letterEntry;
+        this.mLetterEntries[1] = binding.contentMain.letterSection2.letterEntry;
+        this.mLetterEntries[2] = binding.contentMain.letterSection3.letterEntry;
+        this.mLetterEntries[3] = binding.contentMain.letterSection4.letterEntry;
+        this.mLetterEntries[4] = binding.contentMain.letterSection5.letterEntry;
     }
 
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         binding.contentMain.lettersContainedSection.lettersContained.setText("");
         binding.contentMain.lettersNotContainedSection.lettersNotContained.setText("");
 
-        for(EditText et : this.letterEntries){
+        for(EditText et : this.mLetterEntries){
             et.setText("");
         }
 
@@ -205,8 +205,8 @@ public class MainActivity extends AppCompatActivity {
      * @param data the text to be placed in all the EditText fields
      */
     private void setLetterEntries(String[] data){
-        for(int i = 0; i < letterEntries.length; i++){
-            letterEntries[i].setText(data[i]);
+        for(int i = 0; i < mLetterEntries.length; i++){
+            mLetterEntries[i].setText(data[i]);
         }
     }
 
@@ -220,9 +220,9 @@ public class MainActivity extends AppCompatActivity {
      * @return an array of the letters the user entered.
      */
     String[] collectLetterEntries(){
-        String[] data = new String[letterEntries.length];
-        for(int i = 0; i < letterEntries.length; i++){
-            data[i] = letterEntries[i].getText().toString();
+        String[] data = new String[mLetterEntries.length];
+        for(int i = 0; i < mLetterEntries.length; i++){
+            data[i] = mLetterEntries[i].getText().toString();
         }
 
         return data;
@@ -238,8 +238,8 @@ public class MainActivity extends AppCompatActivity {
      * @param selections the selections the spinners need to be set to.
      */
     private void setSpinnerSelections(int[] selections){
-        for(int i = 0; i < spinners.length; i++){
-            spinners[i].setSelection(selections[i]);
+        for(int i = 0; i < mSpinners.length; i++){
+            mSpinners[i].setSelection(selections[i]);
         }
     }
 
@@ -251,9 +251,9 @@ public class MainActivity extends AppCompatActivity {
      * @return an array of ID's representing what item each spinner has selected
      */
     int[] collectSpinnerSettings(){
-        int[] data = new int[spinners.length];
-        for(int i = 0; i < spinners.length; i++){
-            data[i] = spinners[i].getSelectedItemPosition();
+        int[] data = new int[mSpinners.length];
+        for(int i = 0; i < mSpinners.length; i++){
+            data[i] = mSpinners[i].getSelectedItemPosition();
         }
 
         return data;
@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //TODO: rename function and give it javadoc
-    private void restoreOrSetFromPreferences_AllAppAndGameSettings(){
+    private void restoreSettingsFromPreferences(){
         //TODO
     }
 }
