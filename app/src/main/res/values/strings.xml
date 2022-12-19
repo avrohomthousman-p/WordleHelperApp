@@ -30,7 +30,7 @@
     <!-- Preference Titles -->
     <string name="display_settings">Display</string>
     <string name="game_settings">Game</string>
-    <string name="auto_save">Auto-Save</string>
+    <string name="auto_save_title">Auto-Save</string>
 
 
     <!-- Messages Preferences -->
@@ -41,5 +41,6 @@
     <string name="auto_save_off">A new game is started on start up</string>
 
     <string name="dark_mode_key">mode</string>
+    <string name="auto_save_key">auto_save</string>
 
 </resources>

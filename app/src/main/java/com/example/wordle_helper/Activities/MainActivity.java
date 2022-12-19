@@ -1,6 +1,9 @@
 package com.example.wordle_helper.Activities;
 
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     final EditText[] mLetterEntries = new EditText[5];
 
     ActivityMainBinding binding;
+
+    boolean mAutoSave;
 
     ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -144,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             imm.hideSoftInputFromWindow(binding.contentMain.contentMain.getWindowToken(), 0);
         }
         catch(Exception e){
-            Log.println(Log.WARN, "Keyboard", "hide keyboard was clicked but keyboard could  not be hidden");
+            Log.println(Log.WARN, "Keyboard", "hide keyboard was clicked but keyboard could not be hidden");
         }
     }
 
@@ -260,8 +265,52 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //TODO: rename function and give it javadoc
-    private void restoreSettingsFromPreferences(){
-        //TODO
+    @Override
+    protected void onStart(){
+        super.onStart();
+        restoreSettingsFromPreferences();
+        if(mAutoSave){
+            //TODO: tell model to load game
+        }
+    }
+
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        saveSettings();
+    }
+
+
+    /**
+     * Tells the model to save this game, if we are set to save the current game for next time
+     * the app starts up. Otherwise, does nothing.
+     *
+     * If new settings are added to this app, they will need to be handled here.
+     */
+    protected void saveSettings() {
+        // tell the model to save the current game.
+        if (mAutoSave) {
+            //TODO: tell model to save game
+        }
+
+
+        /*   Manage any new settings here   */
+
+    }
+
+
+    /**
+     * Updates all settings based on the user selections in the settings activity.
+     *
+     * Given that the only settings we currently have do not effect gameplay, we don't
+     * really need to use this method, but it is here in case more settings are added in
+     * the future.
+     */
+    protected void restoreSettingsFromPreferences(){
+        SharedPreferences sp = getDefaultSharedPreferences(this);
+        mAutoSave = sp.getBoolean(getString(R.string.auto_save_key), true);
+
+        /*  New Settings should be added here  */
     }
 }
