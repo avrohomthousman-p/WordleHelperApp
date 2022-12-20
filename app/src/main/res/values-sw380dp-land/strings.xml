@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="letter1">1st letter:</string>
+    <string name="letter2">2nd letter:</string>
+    <string name="letter3">3rd letter:</string>
+    <string name="letter4">4th letter:</string>
+    <string name="letter5">5th letter:</string>
+</resources>
