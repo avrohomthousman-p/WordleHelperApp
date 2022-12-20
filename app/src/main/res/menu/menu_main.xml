@@ -6,12 +6,13 @@
     <item
         android:id="@+id/action_hide_keyboard"
         android:title="@string/action_hide_keyboard"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom|withText"
+        android:icon="@drawable/ic_baseline_keyboard_hide_24"/>
 
     <item
         android:id="@+id/action_new_game"
         android:title="@string/action_new_game"
-        app:showAsAction="always|withText"
+        app:showAsAction="ifRoom|withText"
         android:icon="@drawable/ic_baseline_replay_24"/>
 
     <item
