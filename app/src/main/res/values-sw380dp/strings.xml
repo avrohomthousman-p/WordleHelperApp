@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="letter1">Whose 1st letter:</string>
+    <string name="letter2">Whose 2nd letter:</string>
+    <string name="letter3">Whose 3rd letter:</string>
+    <string name="letter4">Whose 4th letter:</string>
+    <string name="letter5">Whose 5th letter:</string>
+</resources>
