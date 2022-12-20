@@ -14,9 +14,8 @@ import java.util.List;
  * This implementation requires an array of words to use as a list of all
  * possible solutions for a game of Wordle.
  */
-public class WordFilter implements SaveableWordle{
-    //File paths needed for data storage
-    private final String saved_game_file;
+public class WordFilter implements WordleHelper {
+    //File path needed for data storage
     public final String dictionary_file;
 
     private List<String> list;
@@ -26,10 +25,8 @@ public class WordFilter implements SaveableWordle{
 
     public WordFilter(String[] fullWordList, String filesDirectory){
         dictionary_file = filesDirectory + "allWords.bin";
-        saved_game_file = filesDirectory + "savedGame.bin";
 
         Log.println(Log.INFO, "word list filepath", filesDirectory);
-        Log.println(Log.INFO, "saved game filepath", filesDirectory);
 
         initailizeNewDictionary(fullWordList);
     }
@@ -50,25 +47,6 @@ public class WordFilter implements SaveableWordle{
         SerializationUtils.serializeObject(list, dictionary_file);
 
         this.list = list;
-    }
-
-
-    @Override
-    public void saveGame(){
-        SerializationUtils.serializeObject(list, saved_game_file);
-    }
-
-
-    @Override
-    public boolean loadGame(){
-        list = (List<String>) SerializationUtils.deserializeObject(saved_game_file);
-        if(list == null){
-            resetWordList();
-            return false;
-        }
-
-        this.listWasModified = true;
-        return true;
     }
 
 

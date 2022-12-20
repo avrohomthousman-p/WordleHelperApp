@@ -25,9 +25,18 @@ import com.example.wordle_helper.Utils.DisplayUtils;
 import com.example.wordle_helper.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    //Keys for shared preferences
+    private static final String CONTAINS_KEY = "must_contain", NOT_CONTAINS_KEY = "must_not_contain";
+    private static final String[] SPINNER_KEYS = {"spinner1", "spinner2", "spinner3", "spinner4", "spinner5"};
+    private static final String[] LETTER_ENTRY_KEYS = {"first_character", "second_character",
+            "third_character", "fourth_character", "fifth_character"};
+
+
+
     public static final String APP_DESCRIPTION = "This app gives you words to help you solve a game " +
             "of Wordle. You can enter the letters on the home screen as prompted, and then click the" +
             " get words button. You will then be shown a list of words that match your requirements.";
+
 
     //To make this accessible in the word_display activity, this needs to be static
     static WordleHelper mModel = null;
@@ -269,8 +278,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         restoreSettingsFromPreferences();
+        loadGameIfNeeded();
+    }
+
+
+    /**
+     * Saves the game for next time the app starts up.
+     */
+    protected void loadGameIfNeeded(){
         if(mAutoSave){
-            //TODO: tell model to load game
+            SharedPreferences preferences = getDefaultSharedPreferences(this);
+
+            this.binding.contentMain.lettersContainedSection.lettersContained
+                    .setText(    preferences.getString(CONTAINS_KEY, "")    );
+
+            this.binding.contentMain.lettersNotContainedSection.lettersNotContained
+                    .setText(    preferences.getString(NOT_CONTAINS_KEY, "")    );
+
+
+            for(int i = 0; i < mLetterEntries.length; i++){
+                mLetterEntries[i].setText(    preferences.getString(LETTER_ENTRY_KEYS[i], "")    );
+                mSpinners[i].setSelection(    preferences.getInt(SPINNER_KEYS[i], 0)    );
+            }
         }
     }
 
@@ -284,19 +313,53 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Tells the model to save this game, if we are set to save the current game for next time
-     * the app starts up. Otherwise, does nothing.
+     * the app starts up. Also manages other settings.
      *
      * If new settings are added to this app, they will need to be handled here.
      */
     protected void saveSettings() {
-        // tell the model to save the current game.
-        if (mAutoSave) {
-            //TODO: tell model to save game
-        }
-
+        saveGameIfNeeded();
 
         /*   Manage any new settings here   */
 
+    }
+
+
+    /**
+     * Saves the user entries of the current game so they can be used when the user
+     * next logs in.
+     */
+    protected void saveGameIfNeeded(){
+        SharedPreferences defaultSharedPreferences = getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = defaultSharedPreferences.edit();
+
+        if(mAutoSave){
+            int[] spinnerSettings = collectSpinnerSettings();
+            String[] letterEntries = collectLetterEntries();
+
+            editor.putString(CONTAINS_KEY,
+                    this.binding.contentMain.lettersContainedSection.lettersContained.getText().toString());
+
+            editor.putString(NOT_CONTAINS_KEY,
+                    this.binding.contentMain.lettersNotContainedSection.lettersNotContained.getText().toString());
+
+
+            for(int i = 0; i < spinnerSettings.length; i++){
+                editor.putInt(SPINNER_KEYS[i], spinnerSettings[i]);
+                editor.putString(LETTER_ENTRY_KEYS[i], letterEntries[i]);
+            }
+        }
+        else{
+            editor.remove(CONTAINS_KEY);
+            editor.remove(NOT_CONTAINS_KEY);
+
+            for(int i = 0; i < SPINNER_KEYS.length; i++){
+                editor.remove(SPINNER_KEYS[i]);
+                editor.remove(LETTER_ENTRY_KEYS[i]);
+            }
+        }
+
+        editor.apply();
     }
 
 
