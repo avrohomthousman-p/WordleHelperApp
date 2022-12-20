@@ -26,11 +26,12 @@ public class WordDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_word_display);
 
 
+        setupTextDisplays();
+
+
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-
-        setupTextDisplays();
     }
 
 
@@ -39,25 +40,14 @@ public class WordDisplayActivity extends AppCompatActivity {
      * from the model).
      */
     private void setupTextDisplays() {
+        //set up main display
+        Thread workerThread = new SetupWordDisplayThread(  findViewById(R.id.all_words)  );
+        workerThread.start();
+
+
+        //set up header
         TextView header = findViewById(R.id.word_display_header);
         header.setText(String.format(HEADER_TEMPLATE, MainActivity.mModel.getNumWords()));
-        displayListOfWords();
-    }
-
-
-    /**
-     * Posts all the words that are still potential solutions on the text view display.
-     */
-    private void displayListOfWords() {
-        TextView mainSection = findViewById(R.id.all_words);
-
-        StringBuilder text = new StringBuilder();
-        for(String current : MainActivity.mModel.getRemainingWords()){
-            text.append(current);
-            text.append("\t\t");
-        }
-
-        mainSection.setText(text.toString());
     }
 
 
