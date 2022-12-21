@@ -1,0 +1,7 @@
+<resources>
+    <string name="letter1">Whose first letter:</string>
+    <string name="letter2">Whose second letter:</string>
+    <string name="letter3">Whose third letter:</string>
+    <string name="letter4">Whose fourth letter:</string>
+    <string name="letter5">Whose fifth letter:</string>
+</resources>
