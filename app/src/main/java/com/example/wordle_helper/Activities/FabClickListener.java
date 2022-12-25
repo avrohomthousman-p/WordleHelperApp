@@ -12,11 +12,11 @@ import com.google.android.material.snackbar.Snackbar;
  * An implementation of OnClickListener designed for the fab in the main activity
  */
 public class FabClickListener implements View.OnClickListener{
-    private final MainActivity context;
+    private final MainActivity mainActivity;
 
 
-    public FabClickListener(MainActivity context){
-        this.context = context;
+    public FabClickListener(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
     }
 
     @Override
@@ -28,8 +28,8 @@ public class FabClickListener implements View.OnClickListener{
 
         //update model and switch activities
         sendRequestsToModel();
-        Intent intent = new Intent(context, WordDisplayActivity.class);
-        context.startActivity(intent);
+        Intent intent = new Intent(mainActivity, WordDisplayActivity.class);
+        mainActivity.startActivity(intent);
     }
 
 
@@ -77,10 +77,10 @@ public class FabClickListener implements View.OnClickListener{
      * contained letters, or null if there are no common letters.
      */
     private Character compareContainAndNotContainForOverlap(){
-        String contained = context.lettersContained.getText().toString();
+        String contained = mainActivity.lettersContained.getText().toString();
 
 
-        String notContained = context.lettersNotContained.getText().toString();
+        String notContained = mainActivity.lettersNotContained.getText().toString();
 
 
         return getOverlappingCharacter(contained, notContained);
@@ -99,15 +99,15 @@ public class FabClickListener implements View.OnClickListener{
      * any spinner set to "Can Contain", or null if no such letter exists.
      */
     private Character compareContainsInSpinnerToNotContainsForOverlap(){
-        final String spinnerPromptCanBe = context.getResources().getStringArray(R.array.contains_array)[0];
-        final String lettersMayNotContain = context.lettersNotContained.getText().toString();
+        final String spinnerPromptCanBe = mainActivity.getResources().getStringArray(R.array.contains_array)[0];
+        final String lettersMayNotContain = mainActivity.lettersNotContained.getText().toString();
 
 
-        for(int i = 0; i < context.mSpinners.length; i++){
-            Spinner current = context.mSpinners[i];
+        for(int i = 0; i < mainActivity.mSpinners.length; i++){
+            Spinner current = mainActivity.mSpinners[i];
 
             if(current.getSelectedItem().equals(spinnerPromptCanBe)){
-                String lettersEntered = context.mLetterEntries[i].getText().toString();
+                String lettersEntered = mainActivity.mLetterEntries[i].getText().toString();
 
                 //check if it has a character that is also in our "Must Not Contain" field
                 Character overlap = getOverlappingCharacter(lettersEntered, lettersMayNotContain);
@@ -150,7 +150,7 @@ public class FabClickListener implements View.OnClickListener{
     private void buildMultiLineSnackbar(View v, String message){
         Log.println(Log.INFO, "length", String.valueOf(R.integer.max_snackbar_lines));
         Snackbar.make(v, message, Snackbar.LENGTH_LONG)
-                .setTextMaxLines(context.getResources().getInteger(R.integer.max_snackbar_lines))
+                .setTextMaxLines(mainActivity.getResources().getInteger(R.integer.max_snackbar_lines))
                 .show();
     }
 
@@ -161,11 +161,11 @@ public class FabClickListener implements View.OnClickListener{
      */
     private void sendRequestsToModel(){
         //check letters the word must contain
-        MainActivity.mModel.retainIfContains(context.lettersContained.getText().toString());
+        MainActivity.mModel.retainIfContains(mainActivity.lettersContained.getText().toString());
 
 
         //check letters the word must not contain
-        MainActivity.mModel.removeIfContains(context.lettersNotContained.getText().toString());
+        MainActivity.mModel.removeIfContains(mainActivity.lettersNotContained.getText().toString());
 
 
 
@@ -187,8 +187,8 @@ public class FabClickListener implements View.OnClickListener{
      * @return a regex that checks that a word uses only the desired characters in the right place.
      */
     private String generateRegexFromSpinnerData() {
-        int[] spinnerSelections = context.collectSpinnerSettings();
-        String[] letterEntries = context.collectLetterEntries();
+        int[] spinnerSelections = mainActivity.collectSpinnerSettings();
+        String[] letterEntries = mainActivity.collectLetterEntries();
 
         StringBuilder regex = new StringBuilder();
         for(int i = 0; i < spinnerSelections.length; i++){
