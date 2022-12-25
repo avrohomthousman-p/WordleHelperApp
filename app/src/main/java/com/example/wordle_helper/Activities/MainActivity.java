@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             "third_character", "fourth_character", "fifth_character"};
 
 
-
+    //Text for "About" screen
     public static final String APP_DESCRIPTION = "This app gives you words to help you solve a game " +
             "of Wordle. You can enter the letters on the home screen as prompted, and then click the" +
             " get words button. You will then be shown a list of words that match your requirements.";
@@ -41,8 +41,12 @@ public class MainActivity extends AppCompatActivity {
     //To make this accessible in the word_display activity, this needs to be static
     static WordleHelper mModel = null;
 
+    //UI objects
     final Spinner[] mSpinners = new Spinner[5];
     final EditText[] mLetterEntries = new EditText[5];
+    EditText lettersContained = null;
+    EditText lettersNotContained = null;
+
 
     ActivityMainBinding binding;
 
@@ -68,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
         binding.fab.fab.setOnClickListener(new FabClickListener(this));
 
         setupSpinners();
+        lettersContained = binding.contentMain.lettersContainedSection.lettersContained;
+        lettersNotContained = binding.contentMain.lettersNotContainedSection.lettersNotContained;
+
 
         if (mModel == null) {
             mModel = new WordFilter(
@@ -167,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
      * Starts a new game by clearing all the text entry fields and resetting the model.
      */
     private void startNewGame(){
-        binding.contentMain.lettersContainedSection.lettersContained.setText("");
-        binding.contentMain.lettersNotContainedSection.lettersNotContained.setText("");
+        lettersContained.setText("");
+        lettersNotContained.setText("");
 
         for(EditText et : this.mLetterEntries){
             et.setText("");
@@ -289,11 +296,9 @@ public class MainActivity extends AppCompatActivity {
         if(mAutoSave){
             SharedPreferences preferences = getDefaultSharedPreferences(this);
 
-            this.binding.contentMain.lettersContainedSection.lettersContained
-                    .setText(    preferences.getString(CONTAINS_KEY, "")    );
+            lettersContained.setText(    preferences.getString(CONTAINS_KEY, "")    );
 
-            this.binding.contentMain.lettersNotContainedSection.lettersNotContained
-                    .setText(    preferences.getString(NOT_CONTAINS_KEY, "")    );
+            lettersNotContained.setText(    preferences.getString(NOT_CONTAINS_KEY, "")    );
 
 
             for(int i = 0; i < mLetterEntries.length; i++){
@@ -337,11 +342,9 @@ public class MainActivity extends AppCompatActivity {
             int[] spinnerSettings = collectSpinnerSettings();
             String[] letterEntries = collectLetterEntries();
 
-            editor.putString(CONTAINS_KEY,
-                    this.binding.contentMain.lettersContainedSection.lettersContained.getText().toString());
+            editor.putString(CONTAINS_KEY, this.lettersContained.getText().toString());
 
-            editor.putString(NOT_CONTAINS_KEY,
-                    this.binding.contentMain.lettersNotContainedSection.lettersNotContained.getText().toString());
+            editor.putString(NOT_CONTAINS_KEY, this.lettersNotContained.getText().toString());
 
 
             for(int i = 0; i < spinnerSettings.length; i++){

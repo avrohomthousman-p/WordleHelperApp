@@ -77,12 +77,10 @@ public class FabClickListener implements View.OnClickListener{
      * contained letters, or null if there are no common letters.
      */
     private Character compareContainAndNotContainForOverlap(){
-        String contained = context.binding.contentMain.lettersContainedSection.lettersContained
-                .getText().toString();
+        String contained = context.lettersContained.getText().toString();
 
 
-        String notContained = context.binding.contentMain.lettersNotContainedSection.lettersNotContained
-                .getText().toString();
+        String notContained = context.lettersNotContained.getText().toString();
 
 
         return getOverlappingCharacter(contained, notContained);
@@ -101,14 +99,14 @@ public class FabClickListener implements View.OnClickListener{
      * any spinner set to "Can Contain", or null if no such letter exists.
      */
     private Character compareContainsInSpinnerToNotContainsForOverlap(){
-        final String lettersMayNotContain = context.binding.contentMain.lettersNotContainedSection
-                .lettersNotContained.getText().toString();
+        final String spinnerPromptCanBe = context.getResources().getStringArray(R.array.contains_array)[0];
+        final String lettersMayNotContain = context.lettersNotContained.getText().toString();
 
 
         for(int i = 0; i < context.mSpinners.length; i++){
             Spinner current = context.mSpinners[i];
 
-            if(current.getSelectedItem().equals(context.getResources().getStringArray(R.array.contains_array)[0])){
+            if(current.getSelectedItem().equals(spinnerPromptCanBe)){
                 String lettersEntered = context.mLetterEntries[i].getText().toString();
 
                 //check if it has a character that is also in our "Must Not Contain" field
@@ -163,13 +161,11 @@ public class FabClickListener implements View.OnClickListener{
      */
     private void sendRequestsToModel(){
         //check letters the word must contain
-        MainActivity.mModel.retainIfContains(context.binding.contentMain
-                .lettersContainedSection.lettersContained.getText().toString());
+        MainActivity.mModel.retainIfContains(context.lettersContained.getText().toString());
 
 
         //check letters the word must not contain
-        MainActivity.mModel.removeIfContains(context.binding.contentMain
-                .lettersNotContainedSection.lettersNotContained.getText().toString());
+        MainActivity.mModel.removeIfContains(context.lettersNotContained.getText().toString());
 
 
 
