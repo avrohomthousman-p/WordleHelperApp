@@ -41,7 +41,7 @@ public class WordDisplayActivity extends AppCompatActivity {
      */
     private void setupTextDisplays() {
         //set up main display
-        Thread workerThread = new SetupWordDisplayThread(  findViewById(R.id.all_words)  );
+        Thread workerThread = new SetupWordDisplayThread(this);
         workerThread.start();
 
 

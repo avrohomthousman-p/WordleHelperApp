@@ -30,6 +30,9 @@ public class FabClickListener implements View.OnClickListener{
         sendRequestsToModel();
         Intent intent = new Intent(mainActivity, WordDisplayActivity.class);
         mainActivity.startActivity(intent);
+
+        //Ensures responsiveness
+        mainActivity.overridePendingTransition(0, 0);
     }
 
 

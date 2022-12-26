@@ -2,15 +2,19 @@ package com.example.wordle_helper.Activities;
 
 import android.widget.TextView;
 
+import com.example.wordle_helper.R;
+
 /**
  * Generates and inserts the text that should be placed into the main edit text of the
  * Word Display Activity.
  */
 public class SetupWordDisplayThread extends Thread {
+    private final WordDisplayActivity activity;
     private final TextView targetSection;
 
-    public SetupWordDisplayThread(TextView target) {
-        this.targetSection = target;
+    public SetupWordDisplayThread(WordDisplayActivity activity) {
+        this.activity = activity;
+        this.targetSection = activity.findViewById(R.id.all_words);
     }
 
     @Override
@@ -22,6 +26,15 @@ public class SetupWordDisplayThread extends Thread {
             text.append("\t\t");
         }
 
-        targetSection.setText(text.toString());
+
+        activity.runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                // Actual UI updates
+                targetSection.setText(text.toString());
+            }
+        });
+
     }
 }

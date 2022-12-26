@@ -42,6 +42,6 @@
 
     <string name="dark_mode_key">mode</string>
     <string name="auto_save_key">auto_save</string>
-    <string name="default_word_display_text">Loading...</string>
+    <string name="default_word_display_text">Loading…</string>
 
 </resources>
