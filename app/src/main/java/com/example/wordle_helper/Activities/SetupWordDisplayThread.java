@@ -19,7 +19,7 @@ public class SetupWordDisplayThread extends Thread {
 
     @Override
     public void run(){
-        StringBuilder text = new StringBuilder();
+        StringBuilder text = new StringBuilder(MainActivity.mModel.getNumWords() * 5);
         java.util.List<String> words = MainActivity.mModel.getRemainingWords();
         for(String current : words){
             text.append(current);
