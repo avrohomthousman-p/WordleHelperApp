@@ -181,6 +181,10 @@ public class MainActivity extends AppCompatActivity {
             et.setText("");
         }
 
+        for(Spinner sp : this.mSpinners){
+            sp.setSelection(0);
+        }
+
         mModel.resetWordList();
     }
 
