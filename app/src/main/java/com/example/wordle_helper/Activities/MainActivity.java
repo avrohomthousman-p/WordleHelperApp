@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
             "third_character", "fourth_character", "fifth_character"};
 
 
+    //Keys for restoring state from the bundle
+    private static final String LETTER_ENTRY_ARRAY_KEY = "letter_entry_data";
+    private static final String SPINNER_ARRAY_KEY = "spinner_settings";
+
+
     //Text for "About" screen
     public static final String APP_DESCRIPTION = "This app gives you words to help you solve a game " +
             "of Wordle. You can enter the letters on the home screen as prompted, and then click the" +
@@ -52,9 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
     boolean mAutoSave;
 
-    ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> restoreSettingsFromPreferences());
+
 
 
 
@@ -140,16 +146,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putStringArray("letter_entry_data", collectLetterEntries());
-        outState.putIntArray("spinner_settings", collectSpinnerSettings());
+        outState.putStringArray(LETTER_ENTRY_ARRAY_KEY, collectLetterEntries());
+        outState.putIntArray(SPINNER_ARRAY_KEY, collectSpinnerSettings());
     }
 
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        setLetterEntries(savedInstanceState.getStringArray("letter_entry_data"));
-        setSpinnerSelections(savedInstanceState.getIntArray("spinner_settings"));
+        setLetterEntries(savedInstanceState.getStringArray(LETTER_ENTRY_ARRAY_KEY));
+        setSpinnerSelections(savedInstanceState.getIntArray(SPINNER_ARRAY_KEY));
     }
 
 
