@@ -75,12 +75,7 @@ public class MainActivity extends AppCompatActivity {
         lettersContained = binding.contentMain.lettersContainedSection.lettersContained;
         lettersNotContained = binding.contentMain.lettersNotContainedSection.lettersNotContained;
 
-
-        if (mModel == null) {
-            mModel = new WordFilter(
-                    this.getResources().getStringArray(R.array.full_word_list),
-                    this.getApplicationContext().getFilesDir().getAbsolutePath());
-        }
+        setupModel();
     }
 
 
@@ -126,88 +121,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if(id == R.id.action_hide_keyboard){
-            hideKeyboardIfPresent();
-            return true;
-        }
-        else if (id == R.id.action_new_game) {
-            startNewGame();
-            return true;
-        }
-        else if(id == R.id.action_settings){
-            displaySettings();
-            return true;
-        }
-        else if(id == R.id.action_about){
-            displayAbout();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
     /**
-     * Hides the keyboard if it is on the screen, and does nothing otherwise.
+     * Instantiates a new model if needed.
      */
-    private void hideKeyboardIfPresent() {
-        try{
-            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(binding.contentMain.contentMain.getWindowToken(), 0);
-        }
-        catch(Exception e){
-            Log.println(Log.WARN, "Keyboard", "hide keyboard was clicked but keyboard could not be hidden");
+    private void setupModel(){
+        if (mModel == null) {
+            mModel = new WordFilter(
+                    this.getResources().getStringArray(R.array.full_word_list),
+                    this.getApplicationContext().getFilesDir().getAbsolutePath());
         }
     }
 
 
-    /**
-     * Starts a new game by clearing all the text entry fields and resetting the model.
-     */
-    private void startNewGame(){
-        lettersContained.setText("");
-        lettersNotContained.setText("");
 
-        for(EditText et : this.mLetterEntries){
-            et.setText("");
-        }
-
-        for(Spinner sp : this.mSpinners){
-            sp.setSelection(0);
-        }
-
-        mModel.resetWordList();
-    }
-
-
-    /**
-     * Opens the Settings Activity.
-     */
-    private void displaySettings(){
-        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-        settingsLauncher.launch(intent);
-    }
-
-
-    /**
-     * Uses the DialogUtils class to display a message about the app.
-     */
-    private void displayAbout(){
-        DisplayUtils.showInfoDialog(this, "About", APP_DESCRIPTION);
-    }
+    /***    Code for saving and restoring App state    ***/
 
 
     @Override
@@ -258,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Sets the selected item of each spinner to the item with the ID specified in the array.
      * This should be used when loading the state of the app as would be necessary with calls
@@ -271,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
             mSpinners[i].setSelection(selections[i]);
         }
     }
+
 
     /**
      * Collects the selected option of all the spinners and saves it to an array. This data can
@@ -386,5 +313,92 @@ public class MainActivity extends AppCompatActivity {
         mAutoSave = sp.getBoolean(getString(R.string.auto_save_key), true);
 
         /*  New Settings should be added here  */
+    }
+
+
+
+    /***   Menu related code   ***/
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if(id == R.id.action_hide_keyboard){
+            hideKeyboardIfPresent();
+            return true;
+        }
+        else if (id == R.id.action_new_game) {
+            startNewGame();
+            return true;
+        }
+        else if(id == R.id.action_settings){
+            displaySettings();
+            return true;
+        }
+        else if(id == R.id.action_about){
+            displayAbout();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * Hides the keyboard if it is on the screen, and does nothing otherwise.
+     */
+    private void hideKeyboardIfPresent() {
+        try{
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(binding.contentMain.contentMain.getWindowToken(), 0);
+        }
+        catch(Exception e){
+            Log.println(Log.WARN, "Keyboard", "hide keyboard was clicked but keyboard could not be hidden");
+        }
+    }
+
+
+    /**
+     * Starts a new game by clearing all the text entry fields and resetting the model.
+     */
+    private void startNewGame(){
+        lettersContained.setText("");
+        lettersNotContained.setText("");
+
+        for(EditText et : this.mLetterEntries){
+            et.setText("");
+        }
+
+        for(Spinner sp : this.mSpinners){
+            sp.setSelection(0);
+        }
+
+        mModel.resetWordList();
+    }
+
+
+    /**
+     * Opens the Settings Activity.
+     */
+    private void displaySettings(){
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+        settingsLauncher.launch(intent);
+    }
+
+
+    /**
+     * Uses the DialogUtils class to display a message about the app.
+     */
+    private void displayAbout(){
+        DisplayUtils.showInfoDialog(this, "About", APP_DESCRIPTION);
     }
 }
