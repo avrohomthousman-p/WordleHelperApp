@@ -84,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Sets up the local variables that reference each spinner and editText, and gives
+     * each spinner an adapter. This method does not set the local variables for the
+     * top two EditText's (the ones for what letters are and are not contained).
+     */
     private void setupSpinners(){
         this.mSpinners[0] = binding.contentMain.letterSection1.spinner;
         this.mSpinners[1] = binding.contentMain.letterSection2.spinner;
@@ -103,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Creates an Adapter object that contains the options that need to be displayed in
+     * a spinner.
+     *
+     * @return an adapter filled with the appropriate spinner options.
+     */
     private ArrayAdapter<CharSequence> createSpinnerAdapter(){
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -125,9 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -154,10 +162,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Hides the keyboard if it is on the screen, and does nothing otherwise.
-     *
-     * I found this code on {@link <a href="https://stackoverflow.com/questions/13593069/
-     * androidhide-keyboard-after-button-click#:~:text=You%20could%20instead,
-     * placed%20on%20it.">StackOverFlow</a>}
      */
     private void hideKeyboardIfPresent() {
         try{
@@ -294,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * Saves the game for next time the app starts up.
+     * Loads the game when the app starts up.
      */
     protected void loadGameIfNeeded(){
         if(mAutoSave){
