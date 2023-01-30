@@ -31,6 +31,7 @@
     <string name="display_settings">Display</string>
     <string name="game_settings">Game</string>
     <string name="auto_save_title">Auto-Save</string>
+    <string name="auto_reset_title">Auto-Reset-Game</string>
 
 
     <!-- Messages Preferences -->
@@ -39,9 +40,13 @@
     <string name="dark_mode_off">Use Light mode</string>
     <string name="auto_save_on">The game automatically saves on exit</string>
     <string name="auto_save_off">A new game is started on start up</string>
+    <string name="auto_reset_on">A new game is automatically started after every time you go back to the home screen</string>
+    <string name="auto_reset_off">A new game only starts when you press the \"New Game\" button</string>
+
 
     <string name="dark_mode_key">mode</string>
     <string name="auto_save_key">auto_save</string>
+    <string name="auto_reset_key">auto_reset</string>
     <string name="default_word_display_text">Loading…</string>
 
 </resources>
