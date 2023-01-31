@@ -77,11 +77,26 @@ public class MainActivity extends AppCompatActivity {
 
         binding.fab.fab.setOnClickListener(new FabClickListener(this));
 
+
+        //setup references to the UI objects
         setupSpinners();
         lettersContained = binding.contentMain.lettersContainedSection.lettersContained;
         lettersNotContained = binding.contentMain.lettersNotContainedSection.lettersNotContained;
 
+
         setupModel();
+
+
+        restoreSettingsFromPreferences();
+
+
+        //Restore the user entries in the data fields only if auto-save is set
+        //to on, and we don't already have data saved to the bundle. If we have
+        //data saved in the bundle, that will be loaded when the method
+        //onRestoreInstanceState is called.
+        if(mAutoSave && savedInstanceState == null){
+            loadDataEntries();
+        }
     }
 
 
@@ -143,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
     /***    Code for saving and restoring App state    ***/
 
 
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -157,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
         setLetterEntries(savedInstanceState.getStringArray(LETTER_ENTRY_ARRAY_KEY));
         setSpinnerSelections(savedInstanceState.getIntArray(SPINNER_ARRAY_KEY));
     }
-
 
     /**
      * Sets the text of each EditText associated with a spinner to the text specified
@@ -222,30 +237,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        restoreSettingsFromPreferences();
-        loadGameIfNeeded();
-    }
-
 
     /**
-     * Loads the game when the app starts up.
+     * Loads the game when the app starts up. The data is loaded from the shared preferences,
+     * so this method should not be used if auto-save is off.
      */
-    protected void loadGameIfNeeded(){
-        if(mAutoSave){
-            SharedPreferences preferences = getDefaultSharedPreferences(this);
+    protected void loadDataEntries(){
+        SharedPreferences preferences = getDefaultSharedPreferences(this);
 
-            lettersContained.setText(    preferences.getString(CONTAINS_KEY, "")    );
+        lettersContained.setText(    preferences.getString(CONTAINS_KEY, "")    );
 
-            lettersNotContained.setText(    preferences.getString(NOT_CONTAINS_KEY, "")    );
+        lettersNotContained.setText(    preferences.getString(NOT_CONTAINS_KEY, "")    );
 
 
-            for(int i = 0; i < mLetterEntries.length; i++){
-                mLetterEntries[i].setText(    preferences.getString(LETTER_ENTRY_KEYS[i], "")    );
-                mSpinners[i].setSelection(    preferences.getInt(SPINNER_KEYS[i], 0)    );
-            }
+        for(int i = 0; i < mLetterEntries.length; i++){
+            mLetterEntries[i].setText(    preferences.getString(LETTER_ENTRY_KEYS[i], "")    );
+            mSpinners[i].setSelection(    preferences.getInt(SPINNER_KEYS[i], 0)    );
         }
     }
 
@@ -337,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if(id == R.id.action_hide_keyboard){
             hideKeyboardIfPresent();
             return true;
