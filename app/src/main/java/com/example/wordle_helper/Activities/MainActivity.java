@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    boolean mAutoSave;
+    private boolean mAutoSave;
+    private boolean mAutoReset;
 
     private final ActivityResultLauncher<Intent> settingsLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -90,11 +91,9 @@ public class MainActivity extends AppCompatActivity {
         restoreSettingsFromPreferences();
 
 
-        //Restore the user entries in the data fields only if auto-save is set
-        //to on, and we don't already have data saved to the bundle. If we have
-        //data saved in the bundle, that will be loaded when the method
-        //onRestoreInstanceState is called.
-        if(mAutoSave && savedInstanceState == null){
+        //if we got here from a fresh start up of the app and auto save is on, load the old game
+        if(savedInstanceState == null && mAutoSave){
+            Log.println(Log.INFO, "restoring state", "loading game from shared preferences");
             loadDataEntries();
         }
     }
@@ -170,8 +169,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
+        Log.println(Log.INFO, "restoring state", "game data is being loaded from a bundle");
+
+        //restore the state by loading the correct user entries into the input fields.
         setLetterEntries(savedInstanceState.getStringArray(LETTER_ENTRY_ARRAY_KEY));
         setSpinnerSelections(savedInstanceState.getIntArray(SPINNER_ARRAY_KEY));
+
     }
 
     /**
@@ -258,6 +262,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onStart(){
+        super.onStart();
+
+
+        if(mAutoReset){
+            Log.println(Log.INFO, "restoring state", "starting new game");
+            startNewGame();
+        }
+    }
+
+
+    @Override
     protected void onStop(){
         super.onStop();
         saveSettings();
@@ -324,6 +340,7 @@ public class MainActivity extends AppCompatActivity {
     protected void restoreSettingsFromPreferences(){
         SharedPreferences sp = getDefaultSharedPreferences(this);
         mAutoSave = sp.getBoolean(getString(R.string.auto_save_key), true);
+        mAutoReset = sp.getBoolean(getString(R.string.auto_reset_key), false);
 
         /*  New Settings should be added here  */
     }
