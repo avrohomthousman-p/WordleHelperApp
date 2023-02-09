@@ -45,6 +45,12 @@ public class FabClickListener implements View.OnClickListener{
      * @return true if there was an error, and false otherwise
      */
     private boolean makeErrorSnackbar(View v){
+        if(!allInputIsAlphabetic()){
+            buildMultiLineSnackbar(v, "Only letters are allowed.");
+            return true;
+        }
+
+
         Character problem = compareContainAndNotContainForOverlap();
         if(problem != null){
             buildMultiLineSnackbar(v, String.format(
@@ -67,6 +73,30 @@ public class FabClickListener implements View.OnClickListener{
 
         return false;
     }
+
+
+    /**
+     * Checks that all the text entered by the user is alphabetic characters.
+     *
+     * @return true if all the user input is alphabetic, and false if any non-alphabetic
+     *              characters are found.
+     */
+    private boolean allInputIsAlphabetic(){
+        String regex = "[a-zA-Z]*";  //Contains only alphabetic characters
+
+        boolean legal = true;
+        legal = legal && mainActivity.lettersContained.getText().toString().matches(regex);
+        legal = legal && mainActivity.lettersNotContained.getText().toString().matches(regex);
+
+        String[] letterEntries = mainActivity.collectLetterEntries();
+
+        for(int i = 0; i < letterEntries.length && legal; i++){
+            legal = legal && letterEntries[i].matches(regex);
+        }
+
+        return legal;
+    }
+
 
 
     /**
