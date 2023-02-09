@@ -26,6 +26,7 @@ public class FabClickListener implements View.OnClickListener{
         }
 
 
+
         //update model and switch activities
         sendRequestsToModel();
         Intent intent = new Intent(mainActivity, WordDisplayActivity.class);
@@ -164,11 +165,13 @@ public class FabClickListener implements View.OnClickListener{
      */
     private void sendRequestsToModel(){
         //check letters the word must contain
-        MainActivity.mModel.retainIfContains(mainActivity.lettersContained.getText().toString());
+        MainActivity.mModel.retainIfContains(
+                mainActivity.lettersContained.getText().toString().toLowerCase());
 
 
         //check letters the word must not contain
-        MainActivity.mModel.removeIfContains(mainActivity.lettersNotContained.getText().toString());
+        MainActivity.mModel.removeIfContains(
+                mainActivity.lettersNotContained.getText().toString().toLowerCase());
 
 
 
@@ -207,7 +210,7 @@ public class FabClickListener implements View.OnClickListener{
                     regex.append('^');
                 }
 
-                regex.append(userEntry);
+                regex.append(userEntry.toLowerCase());
             }
 
             regex.append(']');
