@@ -3,11 +3,11 @@
     <PreferenceCategory app:title="@string/display_settings">
 
         <SwitchPreferenceCompat
-            app:title="@string/dark_mode"
-            app:key="@string/dark_mode_key"
             app:defaultValue="false"
+            app:key="@string/dark_mode_key"
+            app:summaryOff="@string/dark_mode_off"
             app:summaryOn="@string/dark_mode_on"
-            app:summaryOff="@string/dark_mode_off"/>
+            app:title="@string/dark_mode" />
 
 
     </PreferenceCategory>
@@ -15,11 +15,21 @@
     <PreferenceCategory app:title="@string/game_settings">
 
         <SwitchPreferenceCompat
-            app:key="@string/auto_save_key"
             app:defaultValue="true"
+            app:disableDependentsState="true"
+            app:key="@string/auto_save_key"
             app:summaryOff="@string/auto_save_off"
             app:summaryOn="@string/auto_save_on"
             app:title="@string/auto_save_title" />
+
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:dependency="@string/auto_save_key"
+            app:key="@string/auto_reset_key"
+            app:summaryOff="@string/auto_reset_off"
+            app:summaryOn="@string/auto_reset_on"
+            app:title="@string/auto_reset_title" />
 
     </PreferenceCategory>
 
